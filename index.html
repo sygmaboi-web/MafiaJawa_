@@ -12,12 +12,12 @@
     <div class="logo">🌟 Mafia Jawa</div>
     <ul class="menu">
       <li><a href="#" onclick="showSection('home')">Home</a></li>
-      <li><a href="#" onclick="showSection('kasir')">Mesin Kasir</a></li>
-      <li><a href="#" onclick="showSection('penjualan')">Hasil Penjualan</a></li>
+      <li><a href="#" onclick="aksesKasir()">Mesin Kasir</a></li>
+      <li><a href="#" onclick="aksesPenjualan()">Hasil Penjualan</a></li>
     </ul>
   </nav>
 
-  <!-- Halaman Utama (Deskripsi + Harga) -->
+  <!-- Halaman Utama -->
   <section id="home" class="section active">
     <h1>Selamat Datang di <span>🍴 Mafia Jawa</span></h1>
     <p>Stand official kelas 9 SMP Islam Plus Baitul Maal di acara <b>Market Day</b> dengan nama <span>Ninefoosion</span>.</p>
@@ -49,13 +49,17 @@
   <!-- Kasir -->
   <section id="kasir" class="section">
     <h2>💻 Mesin Kasir</h2>
-    <div id="kasirContent"></div>
+    <div id="kasirContent">
+      <p class="locked">🔒 Masukkan password untuk membuka mesin kasir</p>
+    </div>
   </section>
 
   <!-- Penjualan -->
   <section id="penjualan" class="section">
     <h2>📊 Hasil Penjualan</h2>
-    <div id="penjualanContent"></div>
+    <div id="penjualanContent">
+      <p class="locked">🔒 Masukkan password untuk membuka hasil penjualan</p>
+    </div>
   </section>
 
   <footer>
@@ -65,3 +69,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+
