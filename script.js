@@ -1,76 +1,55 @@
-const passwordKasir = "KELOMPOK1KEREN";
+const PASSWORD = "KELOMPOK1KEREN";
 let penjualan = [];
-let stok = {
-  corndogKecil: 50,
-  corndogBesar: 50,
-  toxicRed: 50
-};
-let harga = {
-  corndogKecil: 4000,
-  corndogBesar: 7000,
-  toxicRed: 4000
+let totalBarang = {
+  "Corndog Kecil": 0,
+  "Corndog Besar": 0,
+  "Red Poison": 0
 };
 
-function loginKasir() {
-  const input = document.getElementById("passwordInput").value;
-  if (input === passwordKasir) {
-    document.getElementById("loginKasir").style.display = "none";
-    document.getElementById("kasirContent").classList.remove("hidden");
+function login() {
+  const pw = document.getElementById("password").value;
+  if (pw === PASSWORD) {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("kasir-content").style.display = "block";
   } else {
     alert("Password salah!");
   }
 }
 
 function tambahTransaksi() {
-  const produk = document.getElementById("produkSelect").value;
-  const jumlah = parseInt(document.getElementById("jumlahInput").value);
+  const produk = document.getElementById("produk").value;
+  const jumlah = parseInt(document.getElementById("jumlah").value);
+  let harga = produk === "Corndog Besar" ? 7000 : 4000;
 
-  if (stok[produk] < jumlah) {
-    alert("Stok tidak cukup!");
-    return;
-  }
+  penjualan.push({produk, jumlah, harga: harga * jumlah});
+  totalBarang[produk] += jumlah;
 
-  stok[produk] -= jumlah;
-  const total = harga[produk] * jumlah;
-  const transaksi = { produk, jumlah, total };
-  penjualan.push(transaksi);
-
-  cetakStruk(transaksi);
-  updateRekap();
+  let keranjang = document.getElementById("keranjang");
+  let li = document.createElement("li");
+  li.textContent = `${jumlah} x ${produk} = Rp${harga * jumlah}`;
+  keranjang.appendChild(li);
 }
 
-function cetakStruk(transaksi) {
-  const strukDiv = document.getElementById("struk");
-  const namaProduk = {
-    corndogKecil: "Corndog Kecil",
-    corndogBesar: "Corndog Besar",
-    toxicRed: "Toxic Red"
-  };
+function cetakStruk() {
+  let struk = "=== STRUK PEMBELIAN ===\n";
+  let total = 0;
 
-  strukDiv.innerHTML = `
-    <h3>🧾 Struk Pembelian</h3>
-    <p>Produk: ${namaProduk[transaksi.produk]}</p>
-    <p>Jumlah: ${transaksi.jumlah}</p>
-    <p>Total: Rp${transaksi.total.toLocaleString()}</p>
-    <hr>
-  `;
-}
-
-function updateRekap() {
-  const rekapDiv = document.getElementById("rekapPenjualan");
-  if (penjualan.length === 0) {
-    rekapDiv.innerHTML = "<p>Belum ada data penjualan</p>";
-    return;
-  }
-
-  let totalSemua = 0;
-  let html = "<ul>";
-  penjualan.forEach((p, index) => {
-    html += `<li>${index+1}. ${p.produk} x ${p.jumlah} = Rp${p.total.toLocaleString()}</li>`;
-    totalSemua += p.total;
+  penjualan.forEach(p => {
+    struk += `${p.jumlah} x ${p.produk} = Rp${p.harga}\n`;
+    total += p.harga;
   });
-  html += `</ul><h3>Total Pendapatan: Rp${totalSemua.toLocaleString()}</h3>`;
-  rekapDiv.innerHTML = html;
-}
 
+  struk += `\nTOTAL: Rp${total}\n`;
+  struk += "Terima kasih sudah belanja di Mafia Jawa!";
+
+  alert(struk);
+
+  // update laporan
+  let laporan = "<h3>Rekap Penjualan:</h3><ul>";
+  for (let key in totalBarang) {
+    laporan += `<li>${key}: ${totalBarang[key]}</li>`;
+  }
+  laporan += "</ul>";
+  document.getElementById("laporan").innerHTML = laporan;
+}
 
