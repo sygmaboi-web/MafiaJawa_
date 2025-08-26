@@ -1,96 +1,153 @@
-let keranjang = [];
-let total = 0;
-
-let rekap = { kecil: 0, besar: 0, toxic: 0, total: 0 };
-
-function showPage(page) {
-  document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
-  document.getElementById(page).classList.remove('hidden');
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #3ad29f, #33a1ff, #ffffff);
+  background-size: 400% 400%;
+  animation: gradientBG 12s ease infinite;
+  color: #222;
 }
 
-function authKasir() {
-  let pass = prompt("Masukkan Password:");
-  if (pass === "KELOMPOK1KEREN") {
-    showPage('kasir');
-  } else {
-    alert("Password salah!");
-  }
+/* Animasi Background */
+@keyframes gradientBG {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
 }
 
-function authKasirHasil() {
-  let pass = prompt("Masukkan Password:");
-  if (pass === "KELOMPOK1KEREN") {
-    showPage('hasil');
-    updateRekap();
-  } else {
-    alert("Password salah!");
-  }
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255,255,255,0.9);
+  padding: 15px 30px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
 }
 
-function tambahPenjualan() {
-  let produk = document.getElementById("produk").value;
-  let jumlah = parseInt(document.getElementById("jumlah").value);
-
-  let namaProduk, harga;
-  if (produk === "kecil") { namaProduk = "Corndog Kecil"; harga = 4000; }
-  if (produk === "besar") { namaProduk = "Corndog Besar"; harga = 7000; }
-  if (produk === "toxic") { namaProduk = "Toxic Red"; harga = 4000; }
-
-  keranjang.push({ nama: namaProduk, harga: harga, jumlah: jumlah });
-  total += harga * jumlah;
-
-  tampilkanKeranjang();
+.navbar .logo {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #0c7c59;
 }
 
-function tampilkanKeranjang() {
-  let list = document.getElementById("keranjang");
-  list.innerHTML = "";
-  keranjang.forEach(item => {
-    let li = document.createElement("li");
-    li.textContent = `${item.nama} x${item.jumlah} = Rp${item.harga * item.jumlah}`;
-    list.appendChild(li);
-  });
-  document.getElementById("total").textContent = total;
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
 }
 
-function checkout() {
-  if (keranjang.length === 0) {
-    alert("Keranjang kosong!");
-    return;
-  }
-
-  keranjang.forEach(item => {
-    if (item.nama === "Corndog Kecil") rekap.kecil += item.jumlah;
-    if (item.nama === "Corndog Besar") rekap.besar += item.jumlah;
-    if (item.nama === "Toxic Red") rekap.toxic += item.jumlah;
-  });
-  rekap.total += total;
-
-  let pembayaran = document.querySelector('input[name="bayar"]:checked').value;
-  let strukBox = document.getElementById("struk");
-  strukBox.classList.remove("hidden");
-  strukBox.innerHTML = `<h4>Struk Pembelian</h4>
-    ${keranjang.map(i => `<p>${i.nama} x${i.jumlah} = Rp${i.harga * i.jumlah}</p>`).join("")}
-    <p><b>Total: Rp${total}</b></p>
-    <p>Pembayaran: ${pembayaran}</p>
-    <p>Terima kasih sudah membeli di Mafia Jawa!</p>`;
-
-  keranjang = [];
-  total = 0;
-  tampilkanKeranjang();
-  document.getElementById("total").textContent = "0";
+.nav-links a {
+  text-decoration: none;
+  color: #0c7c59;
+  font-weight: bold;
+  transition: 0.3s;
 }
 
-function updateRekap() {
-  document.getElementById("rekapKecil").textContent = rekap.kecil;
-  document.getElementById("rekapBesar").textContent = rekap.besar;
-  document.getElementById("rekapToxic").textContent = rekap.toxic;
-  document.getElementById("rekapTotal").textContent = rekap.total;
+.nav-links a:hover {
+  color: #33a1ff;
 }
 
-// QRIS toggle
-document.querySelectorAll('input[name="bayar"]').forEach(r => {
-  r.addEventListener('change', () => {
-    document.getElementById("qrisBox").classList.toggle("hidden", r.value !== "QRIS" || !r.checked);
-  });
-});
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 60px 20px;
+  color: white;
+  animation: fadeIn 2s ease;
+}
+
+.hero h1 span {
+  color: yellow;
+}
+
+.poster-container img {
+  width: 250px;
+  margin: 10px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transition: transform 0.3s;
+}
+.poster-container img:hover {
+  transform: scale(1.1);
+}
+
+/* Section */
+.section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+/* Cards */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  width: 280px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+.card:hover {
+  transform: translateY(-10px);
+}
+.card img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+/* Kasir */
+#kasir-app {
+  margin-top: 20px;
+}
+
+.menu-items button {
+  display: block;
+  margin: 10px auto;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #0c7c59;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.menu-items button:hover {
+  background: #33a1ff;
+}
+
+.payment img {
+  margin-top: 15px;
+  width: 200px;
+}
+
+/* Animasi */
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.fade-in {
+  animation: fadeIn 2s ease;
+}
+
+/* Footer */
+footer {
+  background: rgba(0,0,0,0.7);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+}
+
+/* Hidden Class */
+.hidden {
+  display: none;
+}
