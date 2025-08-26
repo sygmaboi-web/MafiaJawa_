@@ -1,89 +1,76 @@
-let cart = [];
+const passwordKasir = "KELOMPOK1KEREN";
+let penjualan = [];
 let stok = {
-  "Corndog Kecil": 20,
-  "Corndog Besar": 15,
-  "Toxic Red": 25
+  corndogKecil: 50,
+  corndogBesar: 50,
+  toxicRed: 50
 };
-let penjualan = {};
+let harga = {
+  corndogKecil: 4000,
+  corndogBesar: 7000,
+  toxicRed: 4000
+};
 
-// Login Kasir
 function loginKasir() {
-  const pass = document.getElementById("password").value;
-  if (pass === "KELOMPOK1KEREN") {
-    document.getElementById("kasir-app").classList.remove("hidden");
-    document.getElementById("kasir-msg").innerText = "Login berhasil ✅";
+  const input = document.getElementById("passwordInput").value;
+  if (input === passwordKasir) {
+    document.getElementById("loginKasir").style.display = "none";
+    document.getElementById("kasirContent").classList.remove("hidden");
   } else {
-    document.getElementById("kasir-msg").innerText = "Password salah ❌";
+    alert("Password salah!");
   }
 }
 
-// Tambah ke Keranjang
-function tambah(item) {
-  if (stok[item] > 0) {
-    cart.push(item);
-    stok[item]--;
-    updateCart();
-  } else {
-    alert(item + " sudah habis!");
-  }
-}
+function tambahTransaksi() {
+  const produk = document.getElementById("produkSelect").value;
+  const jumlah = parseInt(document.getElementById("jumlahInput").value);
 
-// Update Keranjang
-function updateCart() {
-  let cartDiv = document.getElementById("cart");
-  cartDiv.innerHTML = "<h3>Keranjang</h3>";
-  cart.forEach((item, i) => {
-    cartDiv.innerHTML += `<p>${item} <button onclick="hapus(${i})">❌</button></p>`;
-  });
-}
-
-// Hapus Item
-function hapus(index) {
-  let item = cart[index];
-  stok[item]++;
-  cart.splice(index, 1);
-  updateCart();
-}
-
-// Bayar
-function bayar(metode) {
-  if (cart.length === 0) {
-    alert("Keranjang kosong!");
+  if (stok[produk] < jumlah) {
+    alert("Stok tidak cukup!");
     return;
   }
-  let total = 0;
-  cart.forEach(item => {
-    if (item === "Corndog Kecil") total += 4000;
-    if (item === "Corndog Besar") total += 7000;
-    if (item === "Toxic Red") total += 4000;
 
-    if (!penjualan[item]) penjualan[item] = 0;
-    penjualan[item]++;
-  });
+  stok[produk] -= jumlah;
+  const total = harga[produk] * jumlah;
+  const transaksi = { produk, jumlah, total };
+  penjualan.push(transaksi);
 
-  let strukDiv = document.getElementById("struk");
+  cetakStruk(transaksi);
+  updateRekap();
+}
+
+function cetakStruk(transaksi) {
+  const strukDiv = document.getElementById("struk");
+  const namaProduk = {
+    corndogKecil: "Corndog Kecil",
+    corndogBesar: "Corndog Besar",
+    toxicRed: "Toxic Red"
+  };
+
   strukDiv.innerHTML = `
     <h3>🧾 Struk Pembelian</h3>
-    <p>Barang: ${cart.join(", ")}</p>
-    <p>Total: Rp${total.toLocaleString()}</p>
-    <p>Metode: ${metode}</p>
-    <p>Terima kasih telah membeli di Mafia Jawa!</p>
+    <p>Produk: ${namaProduk[transaksi.produk]}</p>
+    <p>Jumlah: ${transaksi.jumlah}</p>
+    <p>Total: Rp${transaksi.total.toLocaleString()}</p>
+    <hr>
   `;
-
-  if (metode === "QRIS") {
-    document.getElementById("qris-img").classList.remove("hidden");
-  }
-
-  cart = [];
-  updateCart();
-  updateHasil();
 }
 
-// Update Hasil Penjualan
-function updateHasil() {
-  let hasilDiv = document.getElementById("hasil");
-  hasilDiv.innerHTML = "<h3>Rekap Penjualan</h3>";
-  for (let item in penjualan) {
-    hasilDiv.innerHTML += `<p>${item}: ${penjualan[item]} pcs</p>`;
+function updateRekap() {
+  const rekapDiv = document.getElementById("rekapPenjualan");
+  if (penjualan.length === 0) {
+    rekapDiv.innerHTML = "<p>Belum ada data penjualan</p>";
+    return;
   }
+
+  let totalSemua = 0;
+  let html = "<ul>";
+  penjualan.forEach((p, index) => {
+    html += `<li>${index+1}. ${p.produk} x ${p.jumlah} = Rp${p.total.toLocaleString()}</li>`;
+    totalSemua += p.total;
+  });
+  html += `</ul><h3>Total Pendapatan: Rp${totalSemua.toLocaleString()}</h3>`;
+  rekapDiv.innerHTML = html;
 }
+
+
