@@ -1,55 +1,55 @@
-const PASSWORD = "KELOMPOK1KEREN";
-let penjualan = [];
-let totalBarang = {
-  "Corndog Kecil": 0,
-  "Corndog Besar": 0,
-  "Red Poison": 0
-};
+// Navigasi
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+  document.getElementById(pageId).classList.remove('hidden');
+}
 
-function login() {
-  const pw = document.getElementById("password").value;
-  if (pw === PASSWORD) {
-    document.getElementById("login").style.display = "none";
-    document.getElementById("kasir-content").style.display = "block";
+// Login Kasir
+function loginKasir() {
+  const pass = document.getElementById("kasirPassword").value;
+  if (pass === "KELOMPOK1KEREN") {
+    document.getElementById("loginKasir").classList.add("hidden");
+    document.getElementById("kasirApp").classList.remove("hidden");
   } else {
     alert("Password salah!");
   }
 }
 
-function tambahTransaksi() {
-  const produk = document.getElementById("produk").value;
-  const jumlah = parseInt(document.getElementById("jumlah").value);
-  let harga = produk === "Corndog Besar" ? 7000 : 4000;
+// Data penjualan
+let totalKecil = 0, totalBesar = 0, totalRed = 0, totalPendapatan = 0;
 
-  penjualan.push({produk, jumlah, harga: harga * jumlah});
-  totalBarang[produk] += jumlah;
+function tambahPenjualan(e) {
+  e.preventDefault();
+  let kecil = parseInt(document.getElementById("corndogKecil").value) || 0;
+  let besar = parseInt(document.getElementById("corndogBesar").value) || 0;
+  let red = parseInt(document.getElementById("redPoison").value) || 0;
 
-  let keranjang = document.getElementById("keranjang");
-  let li = document.createElement("li");
-  li.textContent = `${jumlah} x ${produk} = Rp${harga * jumlah}`;
-  keranjang.appendChild(li);
-}
+  let total = (kecil * 4000) + (besar * 7000) + (red * 4000);
 
-function cetakStruk() {
-  let struk = "=== STRUK PEMBELIAN ===\n";
-  let total = 0;
+  // Update total
+  totalKecil += kecil;
+  totalBesar += besar;
+  totalRed += red;
+  totalPendapatan += total;
 
-  penjualan.forEach(p => {
-    struk += `${p.jumlah} x ${p.produk} = Rp${p.harga}\n`;
-    total += p.harga;
-  });
+  // Tampilkan struk
+  let strukText = `=== STRUK MAFIA JAWA ===
+Corndog Kecil: ${kecil} x Rp4.000
+Corndog Besar: ${besar} x Rp7.000
+Red Poison: ${red} x Rp4.000
+------------------------
+Total: Rp${total}
+========================
+Terima Kasih!`;
 
-  struk += `\nTOTAL: Rp${total}\n`;
-  struk += "Terima kasih sudah belanja di Mafia Jawa!";
+  document.getElementById("struk").innerText = strukText;
 
-  alert(struk);
-
-  // update laporan
-  let laporan = "<h3>Rekap Penjualan:</h3><ul>";
-  for (let key in totalBarang) {
-    laporan += `<li>${key}: ${totalBarang[key]}</li>`;
-  }
-  laporan += "</ul>";
-  document.getElementById("laporan").innerHTML = laporan;
+  // Update rekap
+  document.getElementById("rekapPenjualan").innerHTML = `
+    <p>Total Corndog Kecil: ${totalKecil}</p>
+    <p>Total Corndog Besar: ${totalBesar}</p>
+    <p>Total Red Poison: ${totalRed}</p>
+    <p><b>Total Pendapatan: Rp${totalPendapatan}</b></p>
+  `;
 }
 
