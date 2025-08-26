@@ -3,83 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mafia Jawa - NineFoosion</title>
+  <title>Mafia Jawa - Ninefoosion</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1 class="title">🍴 Mafia Jawa - NineFoosion 🍹</h1>
-    <nav>
-      <ul>
-        <li><a href="#" onclick="showPage('deskripsi')">Deskripsi</a></li>
-        <li><a href="#" onclick="authKasir()">Mesin Kasir</a></li>
-        <li><a href="#" onclick="authKasirHasil()">Hasil Penjualan</a></li>
-      </ul>
-    </nav>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">🍡 Mafia Jawa</div>
+    <ul class="nav-links">
+      <li><a href="#deskripsi">Deskripsi</a></li>
+      <li><a href="#kasir">Mesin Kasir</a></li>
+      <li><a href="#penjualan">Hasil Penjualan</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <h1>Selamat Datang di <span>Ninefoosion</span></h1>
+    <p>Stand Market Day Kelas 9 SMP Islam Plus Baitul Maal</p>
+    <div class="poster-container">
+      <img src="jualancuy.png" alt="Poster Jualan 1">
+      <img src="jualan.png" alt="Poster Jualan 2">
+    </div>
   </header>
 
   <!-- Deskripsi Produk -->
-  <section id="deskripsi" class="page">
-    <h2>✨ Tentang Produk Kami ✨</h2>
-    <p><b>Corndog</b> adalah jajanan lezat asal Korea yang dibalut tepung renyah dengan sosis di dalamnya. 
-       Cara membuatnya sederhana: sosis ditusuk, dicelupkan ke adonan tepung + jagung, lalu digoreng hingga keemasan. 
-       Tambahkan saus agar makin mantap! 🍯</p>
-    <p><b>Red Poison</b> adalah minuman bersoda merah segar. Resepnya rahasia, tapi rasanya bikin nagih! 🔥</p>
-
-    <h3>Menu</h3>
-    <ul>
-      <li>Corndog Kecil - Rp4.000</li>
-      <li>Corndog Besar - Rp7.000</li>
-      <li>Toxic Red - Rp4.000</li>
-    </ul>
-
-    <div class="gallery">
-      <img src="corndog.jpg" alt="Corndog">
-      <img src="redpotion.jpg" alt="Red Poison">
-      <img src="jualancuy.jpg" alt="Poster Jualan">
-      <img src="jualan.jpg" alt="Poster Jualan 2">
+  <section id="deskripsi" class="section">
+    <h2>🍴 Produk Kami</h2>
+    <div class="cards">
+      <div class="card fade-in">
+        <img src="corndog.png" alt="Corndog">
+        <h3>Corndog</h3>
+        <p>Corndog adalah sosis yang dibalut adonan tepung jagung lalu digoreng hingga keemasan. 
+        Kami menyediakan 2 ukuran: <br>
+        - Kecil: Rp4.000 <br>
+        - Besar: Rp7.000</p>
+        <p><b>Cara pembuatan:</b> Celupkan sosis ke adonan → goreng hingga matang → sajikan dengan saus favorit!</p>
+      </div>
+      <div class="card fade-in">
+        <img src="redpotion.png" alt="Toxic Red">
+        <h3>Toxic Red</h3>
+        <p>Minuman bersoda merah misterius dengan rasa yang menyegarkan. 
+        Rahasia resepnya tetap tersimpan hanya di Mafia Jawa. <br>
+        Harga: Rp4.000</p>
+      </div>
     </div>
   </section>
 
   <!-- Mesin Kasir -->
-  <section id="kasir" class="page hidden">
-    <h2>💰 Mesin Kasir - Mafia Jawa</h2>
-    <label>Pilih Produk:</label>
-    <select id="produk">
-      <option value="kecil">Corndog Kecil - Rp4000</option>
-      <option value="besar">Corndog Besar - Rp7000</option>
-      <option value="toxic">Toxic Red - Rp4000</option>
-    </select>
-    <label>Jumlah:</label>
-    <input type="number" id="jumlah" value="1" min="1">
-    <button onclick="tambahPenjualan()">Tambah</button>
-
-    <h3>Keranjang</h3>
-    <ul id="keranjang"></ul>
-    <h3>Total: Rp<span id="total">0</span></h3>
-
-    <h3>Pembayaran</h3>
-    <label><input type="radio" name="bayar" value="Cash" checked> Cash</label>
-    <label><input type="radio" name="bayar" value="QRIS"> QRIS</label>
-    <div id="qrisBox" class="hidden">
-      <img src="qris.jpg" alt="QRIS Payment" class="qris-img">
+  <section id="kasir" class="section">
+    <h2>🛒 Mesin Kasir</h2>
+    <div id="kasir-container">
+      <input type="password" id="password" placeholder="Masukkan Password">
+      <button onclick="loginKasir()">Login</button>
+      <p id="kasir-msg"></p>
     </div>
-    <button onclick="checkout()">Checkout</button>
-
-    <div id="struk" class="struk hidden"></div>
+    <div id="kasir-app" class="hidden">
+      <div class="menu-items">
+        <button onclick="tambah('Corndog Kecil')">+ Corndog Kecil (Rp4.000)</button>
+        <button onclick="tambah('Corndog Besar')">+ Corndog Besar (Rp7.000)</button>
+        <button onclick="tambah('Toxic Red')">+ Toxic Red (Rp4.000)</button>
+      </div>
+      <div id="cart"></div>
+      <div class="payment">
+        <h3>Pembayaran</h3>
+        <p>Pilih metode pembayaran:</p>
+        <button onclick="bayar('Cash')">Cash</button>
+        <button onclick="bayar('QRIS')">QRIS</button>
+        <img id="qris-img" src="qris.png" alt="QRIS" class="hidden">
+      </div>
+      <div id="struk"></div>
+    </div>
   </section>
 
   <!-- Hasil Penjualan -->
-  <section id="hasil" class="page hidden">
-    <h2>📊 Rekap Penjualan</h2>
-    <p>Total Corndog Kecil Terjual: <span id="rekapKecil">0</span></p>
-    <p>Total Corndog Besar Terjual: <span id="rekapBesar">0</span></p>
-    <p>Total Toxic Red Terjual: <span id="rekapToxic">0</span></p>
-    <h3>Total Pendapatan: Rp<span id="rekapTotal">0</span></h3>
+  <section id="penjualan" class="section">
+    <h2>📊 Hasil Penjualan</h2>
+    <div id="hasil"></div>
   </section>
 
   <footer>
-    <p>© 2025 Mafia Jawa | Nine Foosion SMP Islam Plus Baitul Maal</p>
+    <p>© 2025 Mafia Jawa | Market Day Ninefoosion</p>
   </footer>
 
   <script src="script.js"></script>
