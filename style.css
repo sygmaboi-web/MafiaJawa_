@@ -1,91 +1,85 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to right, #6dd5fa, #ffffff, #8fd3f4);
-  color: #333;
+  background: linear-gradient(135deg, #4ade80, #38bdf8, #ffffff);
+  color: #222;
 }
 
+/* Navbar */
 .navbar {
-  background: #0c8f8f;
-  color: white;
   display: flex;
   justify-content: space-between;
-  padding: 1rem 2rem;
-  position: sticky;
-  top: 0;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-}
-
-.nav-links a {
+  padding: 15px 30px;
+  background: rgba(0, 0, 0, 0.7);
   color: white;
-  text-decoration: none;
+}
+.navbar .logo {
+  font-size: 22px;
   font-weight: bold;
 }
-
-.banner {
-  text-align: center;
-  padding: 3rem 1rem;
-  background: linear-gradient(45deg, #0c8f8f, #00c6ff);
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+.navbar a {
   color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.navbar a:hover {
+  color: #4ade80;
 }
 
-.section {
-  padding: 3rem 2rem;
+/* Halaman */
+.page {
+  padding: 30px;
+}
+.hidden {
+  display: none;
+}
+.active {
+  display: block;
 }
 
-.section h2 {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.produk {
+/* Produk */
+.produk-grid {
   display: flex;
-  gap: 2rem;
-  margin-bottom: 2rem;
-  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
-
-.produk img {
-  width: 200px;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-.harga .cards {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-}
-
-.card {
+.produk-card {
   background: white;
-  padding: 1.5rem;
+  padding: 20px;
   border-radius: 15px;
+  width: 250px;
   text-align: center;
-  width: 180px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
   transition: transform 0.3s;
 }
-
-.card:hover {
+.produk-card:hover {
   transform: scale(1.05);
-  background: #d0f0f0;
+}
+.produk-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+.harga {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #1d4ed8;
 }
 
-#kasir input, #kasir select, #kasir button {
-  margin: 0.5rem 0;
-  padding: 0.5rem;
+/* Struk */
+.struk {
+  margin-top: 20px;
+  padding: 15px;
+  border: 2px dashed #333;
+  background: #f9fafb;
+  white-space: pre-line;
+}
+.qris {
+  width: 200px;
+  margin-top: 10px;
 }
 
-footer {
-  text-align: center;
-  background: #0c8f8f;
-  color: white;
-  padding: 1rem;
-  margin-top: 2rem;
-}
