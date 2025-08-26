@@ -1,8 +1,94 @@
-// Fungsi pindah halaman
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(sec => {
-    sec.classList.remove('active');
-  });
-  document.getElementById(id).classList.add('active');
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background: linear-gradient(135deg, #4facfe 0%, #43e97b 100%);
+  color: #333;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: #2c3e50;
+  color: white;
+}
+.navbar .logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+.menu a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+.menu a:hover {
+  color: #f1c40f;
+}
+
+/* Section */
+.section {
+  display: none;
+  padding: 50px 20px;
+  text-align: center;
+}
+.section.active {
+  display: block;
+}
+
+/* Produk */
+.produk-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  width: 280px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  transition: transform 0.3s;
+}
+.card:hover {
+  transform: scale(1.05);
+}
+.card img {
+  width: 200px;
+  border-radius: 12px;
+}
+.card h2 {
+  margin: 10px 0;
+}
+.card .harga {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #27ae60;
+}
+
+.locked {
+  font-style: italic;
+  color: #888;
+  margin-top: 20px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #2c3e50;
+  color: white;
+  margin-top: 40px;
 }
 
