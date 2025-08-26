@@ -7,81 +7,61 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Navigasi -->
+  <!-- Navbar -->
   <nav class="navbar">
-    <div class="logo">Mafia Jawa</div>
-    <ul>
-      <li><a href="#" onclick="showPage('home')">Deskripsi</a></li>
-      <li><a href="#" onclick="showPage('kasir')">Mesin Kasir</a></li>
-      <li><a href="#" onclick="showPage('penjualan')">Hasil Penjualan</a></li>
+    <div class="logo">🌟 Mafia Jawa</div>
+    <ul class="menu">
+      <li><a href="#" onclick="showSection('home')">Home</a></li>
+      <li><a href="#" onclick="showSection('kasir')">Mesin Kasir</a></li>
+      <li><a href="#" onclick="showSection('penjualan')">Hasil Penjualan</a></li>
     </ul>
   </nav>
 
-  <!-- Halaman: Deskripsi -->
-  <section id="home" class="page active">
-    <h1>Selamat Datang di <span class="highlight">Mafia Jawa</span></h1>
-    <p class="tagline">Nikmati kelezatan corndog hangat & minuman rahasia berwarna merah: <b>Red Poison</b>.</p>
-    
-    <div class="produk-grid">
-      <div class="produk-card">
-        <img src="corndog.jpg" alt="Corndog">
+  <!-- Halaman Utama (Deskripsi + Harga) -->
+  <section id="home" class="section active">
+    <h1>Selamat Datang di <span>🍴 Mafia Jawa</span></h1>
+    <p>Stand official kelas 9 SMP Islam Plus Baitul Maal di acara <b>Market Day</b> dengan nama <span>Ninefoosion</span>.</p>
+
+    <div class="produk-container">
+      <!-- Corndog -->
+      <div class="card">
+        <img src="corndog.png" alt="Corndog">
         <h2>Corndog</h2>
-        <p>Camilan ala Korea, sosis dibalut adonan lalu digoreng hingga keemasan.</p>
-        <div class="harga">
-          <p>Kecil: Rp4.000</p>
-          <p>Besar: Rp7.000</p>
-        </div>
+        <p>Snack khas Korea dengan sosis dibalut adonan renyah, keju lumer di dalamnya.</p>
+        <ul class="harga">
+          <li>Kecil: Rp4.000</li>
+          <li>Besar: Rp7.000</li>
+        </ul>
       </div>
 
-      <div class="produk-card">
-        <img src="redpotion.jpg" alt="Red Poison">
-        <h2>Red Poison</h2>
-        <p>Minuman bersoda rahasia, segar & berwarna merah.</p>
-        <div class="harga">
-          <p>Harga: Rp4.000</p>
-        </div>
+      <!-- Red Poison -->
+      <div class="card">
+        <img src="redpotion.png" alt="Red Poison">
+        <h2>Toxic Red</h2>
+        <p>Minuman bersoda berwarna merah segar. <br><i>Racikan rahasia Mafia Jawa.</i></p>
+        <ul class="harga">
+          <li>Harga: Rp4.000</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- Halaman: Kasir -->
-  <section id="kasir" class="page hidden">
-    <h1>Mesin Kasir</h1>
-    <div id="loginKasir">
-      <p>Masukkan Password:</p>
-      <input type="password" id="kasirPassword">
-      <button onclick="loginKasir()">Masuk</button>
-    </div>
-    
-    <div id="kasirApp" class="hidden">
-      <h2>Input Penjualan</h2>
-      <form onsubmit="tambahPenjualan(event)">
-        <label>Corndog Kecil (Rp4.000): <input type="number" id="corndogKecil" min="0" value="0"></label>
-        <label>Corndog Besar (Rp7.000): <input type="number" id="corndogBesar" min="0" value="0"></label>
-        <label>Red Poison (Rp4.000): <input type="number" id="redPoison" min="0" value="0"></label>
-        <button type="submit">Cetak Struk</button>
-      </form>
-
-      <div id="struk" class="struk"></div>
-
-      <h3>Pembayaran</h3>
-      <p>Bisa via Cash atau QRIS</p>
-      <img src="qris.png" alt="QRIS" class="qris">
-    </div>
+  <!-- Kasir -->
+  <section id="kasir" class="section">
+    <h2>💻 Mesin Kasir</h2>
+    <div id="kasirContent"></div>
   </section>
 
-  <!-- Halaman: Penjualan -->
-  <section id="penjualan" class="page hidden">
-    <h1>Hasil Penjualan</h1>
-    <div id="rekapPenjualan">
-      <p>Total Corndog Kecil: 0</p>
-      <p>Total Corndog Besar: 0</p>
-      <p>Total Red Poison: 0</p>
-      <p><b>Total Pendapatan: Rp0</b></p>
-    </div>
+  <!-- Penjualan -->
+  <section id="penjualan" class="section">
+    <h2>📊 Hasil Penjualan</h2>
+    <div id="penjualanContent"></div>
   </section>
+
+  <footer>
+    <p>© 2025 Mafia Jawa - Ninefoosion | Market Day</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
 </html>
-
