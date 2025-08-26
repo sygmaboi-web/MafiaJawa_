@@ -1,85 +1,88 @@
 body {
-  margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #4ade80, #38bdf8, #ffffff);
-  color: #222;
+  margin: 0;
+  background: linear-gradient(135deg, #5ee7df 0%, #b490ca 100%);
+  color: #333;
 }
 
 /* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
-  padding: 15px 30px;
-  background: rgba(0, 0, 0, 0.7);
+  align-items: center;
+  padding: 15px 40px;
+  background: #2c3e50;
   color: white;
 }
 .navbar .logo {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
 }
-.navbar ul {
+.menu {
   list-style: none;
   display: flex;
   gap: 20px;
 }
-.navbar a {
+.menu a {
   color: white;
   text-decoration: none;
+  font-weight: 500;
   transition: 0.3s;
 }
-.navbar a:hover {
-  color: #4ade80;
+.menu a:hover {
+  color: #f1c40f;
 }
 
-/* Halaman */
-.page {
-  padding: 30px;
-}
-.hidden {
+/* Section */
+.section {
   display: none;
+  padding: 50px 20px;
+  text-align: center;
 }
-.active {
+.section.active {
   display: block;
 }
 
 /* Produk */
-.produk-grid {
+.produk-container {
   display: flex;
-  gap: 20px;
+  justify-content: center;
+  gap: 30px;
   flex-wrap: wrap;
+  margin-top: 30px;
 }
-.produk-card {
+.card {
   background: white;
-  padding: 20px;
   border-radius: 15px;
-  width: 250px;
-  text-align: center;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  padding: 20px;
+  width: 280px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
   transition: transform 0.3s;
 }
-.produk-card:hover {
+.card:hover {
   transform: scale(1.05);
 }
-.produk-card img {
-  width: 100%;
-  border-radius: 10px;
+.card img {
+  width: 200px;
+  border-radius: 12px;
 }
-.harga {
+.card h2 {
+  margin: 10px 0;
+}
+.card .harga {
+  list-style: none;
+  padding: 0;
   margin-top: 10px;
   font-weight: bold;
-  color: #1d4ed8;
+  color: #27ae60;
 }
 
-/* Struk */
-.struk {
-  margin-top: 20px;
-  padding: 15px;
-  border: 2px dashed #333;
-  background: #f9fafb;
-  white-space: pre-line;
-}
-.qris {
-  width: 200px;
-  margin-top: 10px;
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #2c3e50;
+  color: white;
+  margin-top: 40px;
 }
 
